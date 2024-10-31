@@ -82,8 +82,7 @@ def simplex(cost, matrix_R, b):
         nonbasic_vars[index_of_max] = old_basic_var
         
         #calcula novamente matrizes das variaveis basicas e não basicas // não precisava era so trocar mas nao pensei em como ainda
-        matrix_B = np.array([matrix_A[:, basic_vars[0]],matrix_A[:, basic_vars[1]],matrix_A[:, basic_vars[2]]]).T
-        matrix_N = np.array([matrix_A[:, nonbasic_vars[0]],matrix_A[:, nonbasic_vars[1]]]).T
+        matrix_B, matrix_N = gen_B_and_N(matrix_A, basic_vars, nonbasic_vars)
 
 
 
