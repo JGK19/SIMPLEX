@@ -5,8 +5,9 @@ prob = pulp.LpProblem("The Whiskas Problem", pulp.LpMinimize)
 x1 = pulp.LpVariable("ChickenPercent", 0, None, pulp.LpInteger)
 x2 = pulp.LpVariable("BeefPercent", 0)
 
-prob += 0.013 * x1 + 0.008 * x2, "Total Cost of Ingredients per can"
+eq = 0.013 * x1 + 0.008 * x2, "Total Cost of Ingredients per can"
 
+prob += eq
 
 # The five constraints are entered
 prob += x1 + x2 == 100, "PercentagesSum"
