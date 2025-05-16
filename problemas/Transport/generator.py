@@ -3,7 +3,10 @@ import numpy as np
 max_n = 100
 min_n = 1
 
-def gen_transport_problem(oferta, demanda):
+def gen_transport_problem(oferta, demanda, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+
     custos = np.random.randint(min_n, max_n, size=(oferta, demanda))
 
     A = np.random.randint(min_n, max_n, size=oferta)

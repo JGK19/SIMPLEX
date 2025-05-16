@@ -1,13 +1,22 @@
 import numpy as np
 import pulp
 from generator import gen_transport_problem
+from canto_noroeste import canto_noroeste, calcular_custo_total
+from vogel_method import vogel_method
 
-"""Cost = [[3, 4, 5],[6, 7, 8]]
+"""
+Cost = [[3, 4, 5],[6, 7, 8]]
 Oi = [100, 200]
 Dj = [100, 100, 100]
-#Cost = np.array(Cost)"""
+#Cost = np.array(Cost)
+"""
+Oi, Dj, Cost = gen_transport_problem(1000, 1000, seed=42)
 
-Oi, Dj, Cost = gen_transport_problem(10, 10)
+solucao_noroeste = canto_noroeste(Oi, Dj, Cost)
+print("Custo solução do metodo do canto noroeste: ",calcular_custo_total(solucao_noroeste, Cost))
+
+#solucao_vogel = vogel_method(Oi, Dj, Cost)
+#print("Custo solução do metodo da aproximação de Vogel: ",calcular_custo_total(solucao_vogel, Cost))
 
 m = len(Cost)
 n = len(Cost[1])
@@ -21,6 +30,12 @@ prob = pulp.LpProblem("transport_classical", pulp.LpMinimize)
 for i in range(m):
     for j in range(n):
         matrix_var[i][j] = pulp.LpVariable(f"edge_{i}_to_{j}", 0, None, pulp.LpInteger)
+
+# Initial solution with norowhest corner method
+for i in range(m):
+    for j in range(n):
+        valor = solucao_noroeste[i][j]
+        matrix_var[i][j].setInitialValue(valor)
 
 # Objective function
 eq = 0
