@@ -10,10 +10,12 @@ Oi = [100, 200]
 Dj = [100, 100, 100]
 #Cost = np.array(Cost)
 """
-Oi, Dj, Cost = gen_transport_problem(1000, 1000, seed=42)
+
+Oi, Dj, Cost = gen_transport_problem(1000, 100, seed=42)
 
 solucao_noroeste = canto_noroeste(Oi, Dj, Cost)
-print("Custo solução do metodo do canto noroeste: ",calcular_custo_total(solucao_noroeste, Cost))
+custo_noroeste = calcular_custo_total(solucao_noroeste, Cost)
+print("Custo solução do metodo do canto noroeste: ",custo_noroeste)
 
 #solucao_vogel = vogel_method(Oi, Dj, Cost)
 #print("Custo solução do metodo da aproximação de Vogel: ",calcular_custo_total(solucao_vogel, Cost))
@@ -45,6 +47,13 @@ for i in range(m):
 
 prob += eq, "total cost for transport"
 
+"""
+restricao_objetivo = 0
+for i in range(m):
+    for j in range(n):
+        restricao_objetivo += matrix_var[i][j] * Cost[i][j]
+prob += restricao_objetivo <= custo_noroeste"""
+
 # for each "oferta" node the sum of all edges going out needs to be the total offer in the node
 for i in range(m):
     res = matrix_var[i][0]
@@ -63,7 +72,7 @@ for j in range(n):
 
 prob.writeLP("Transport.lp")
 
-prob.solve()
+prob.solve(pulp.PULP_CBC_CMD(msg=True, warmStart=True))
 
 print("Status:", pulp.LpStatus[prob.status])
 

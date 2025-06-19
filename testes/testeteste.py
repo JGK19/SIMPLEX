@@ -2,7 +2,7 @@ import pulp
 
 
 # Carregar o arquivo MPS
-mps_filename = "C:/Users/jgkon/OneDrive/Documents/projects-programa/SIMPLEX/25FV47.SIF"
+mps_filename = "C:/Users/jgkon/Documents/projects-programa/SIMPLEX/testes/bal8x12.mps"
 
 """with open(mps_filename) as reader:
     for line in reader:
