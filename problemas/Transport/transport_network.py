@@ -6,7 +6,7 @@ from generator import gen_transport_problem
 Oi = [100, 200]
 Dj = [100, 100, 100]"""
 
-Oi, Dj, Cost = gen_transport_problem(1000, 1000, seed=42)
+Oi, Dj, Cost = gen_transport_problem(100, 1000, seed=42)
 
 O = [_ for _ in range(1, len(Oi)+1)]
 D = [_ for _ in range(len(Oi)+1, len(Oi)+len(Dj)+1)]

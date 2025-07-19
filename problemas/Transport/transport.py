@@ -3,6 +3,7 @@ import pulp
 from generator import gen_transport_problem
 from canto_noroeste import canto_noroeste, calcular_custo_total
 from vogel_method import vogel_method
+import pandas as pd
 
 """
 Cost = [[3, 4, 5],[6, 7, 8]]
@@ -11,11 +12,19 @@ Dj = [100, 100, 100]
 #Cost = np.array(Cost)
 """
 
-Oi, Dj, Cost = gen_transport_problem(1000, 100, seed=42)
+#Oi, Dj, Cost = gen_transport_problem(3, 3, seed=42)
 
-solucao_noroeste = canto_noroeste(Oi, Dj, Cost)
-custo_noroeste = calcular_custo_total(solucao_noroeste, Cost)
-print("Custo solução do metodo do canto noroeste: ",custo_noroeste)
+df = pd.read_csv("transportP - mnist8.csv")
+
+
+Oi = np.array(df.iloc[0])
+Oi = Oi[Oi != 0]
+Dj = np.array(df.iloc[1])
+Cost = np.array(df.iloc[2:178, 0:210])
+
+#solucao_noroeste = canto_noroeste(Oi, Dj, Cost)
+#custo_noroeste = calcular_custo_total(solucao_noroeste, Cost)
+#print("Custo solução do metodo do canto noroeste: ",custo_noroeste)
 
 #solucao_vogel = vogel_method(Oi, Dj, Cost)
 #print("Custo solução do metodo da aproximação de Vogel: ",calcular_custo_total(solucao_vogel, Cost))
@@ -31,13 +40,13 @@ prob = pulp.LpProblem("transport_classical", pulp.LpMinimize)
 # Creating each variable i-j
 for i in range(m):
     for j in range(n):
-        matrix_var[i][j] = pulp.LpVariable(f"edge_{i}_to_{j}", 0, None, pulp.LpInteger)
-
+        matrix_var[i][j] = pulp.LpVariable(f"edge_{i}_to_{j}", 0, None, pulp.LpContinuous)
+"""
 # Initial solution with norowhest corner method
 for i in range(m):
     for j in range(n):
         valor = solucao_noroeste[i][j]
-        matrix_var[i][j].setInitialValue(valor)
+        matrix_var[i][j].setInitialValue(valor) """
 
 # Objective function
 eq = 0
@@ -72,11 +81,11 @@ for j in range(n):
 
 prob.writeLP("Transport.lp")
 
-prob.solve(pulp.PULP_CBC_CMD(msg=True, warmStart=True))
+prob.solve(pulp.PULP_CBC_CMD(msg=True))
 
 print("Status:", pulp.LpStatus[prob.status])
 
-"""for v in prob.variables():
-    print(v.name, "=", v.varValue)"""
+for v in prob.variables():
+    print(v.name, "=", v.varValue)
 
 print("Total Cost = ", pulp.value(prob.objective))
