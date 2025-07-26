@@ -1,5 +1,5 @@
 from amplpy import AMPL
-from helpf import salvar_dados_ampl_transport, gen_transport_problem, canto_noroeste, calcular_custo_total
+from helpf import salvar_dados_ampl_transport, gen_transport_problem, gen_transport_problem_notint ,canto_noroeste, calcular_custo_total
 import time
 import pandas as pd
 import numpy as np
@@ -21,7 +21,7 @@ Oi = Oi[Oi != 0]
 Dj = np.array(df.iloc[1])
 Cost = np.array(df.iloc[2:178, 0:210])"""
 
-Oi, Dj, Cost = gen_transport_problem(100, 100, seed=42)
+Oi, Dj, Cost = gen_transport_problem_notint(1000, 1000, seed=42)
 
 salvar_dados_ampl_transport(Oi, Dj, Cost, filename="transportDat.dat")
 
@@ -36,7 +36,7 @@ ampl.read("transportMod.mod")
 ampl.read_data("transportDat.dat")
 
 # Escolhe o solver (pode ser "cbc", "highs", "gurobi", etc.)
-ampl.option["solver"] = "gurobi"
+ampl.option["solver"] = "highs"
 ampl.option["show_stats"] = 1
 
 ampl.eval("option times 1;")

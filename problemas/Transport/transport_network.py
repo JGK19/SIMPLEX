@@ -1,12 +1,24 @@
 import numpy as np
 import pulp
 from generator import gen_transport_problem
+import pandas as pd
 
 """Cost = [[3, 4, 5],[6, 7, 8]]
 Oi = [100, 200]
 Dj = [100, 100, 100]"""
 
-Oi, Dj, Cost = gen_transport_problem(100, 1000, seed=42)
+Oi, Dj, Cost = gen_transport_problem(202, 902, seed=42)
+
+"""df = pd.read_csv("problema_201x901_[1,100]_seed42", header=None)
+
+num_ofertas = int(df.iloc[0, 0])
+num_demandas = int(df.iloc[0, 1])
+
+Oi = df.iloc[1, :num_ofertas].to_numpy()
+Dj = df.iloc[2, :num_demandas].to_numpy()
+
+Cost = df.iloc[3:3+num_ofertas, :num_demandas].to_numpy()"""
+
 
 O = [_ for _ in range(1, len(Oi)+1)]
 D = [_ for _ in range(len(Oi)+1, len(Oi)+len(Dj)+1)]
@@ -15,9 +27,9 @@ V = O + D + [0] + [len(O) + len(D) + 1]
 indexed_cost = {(o, d): Cost[i][j] for i, o in enumerate(O) for j, d in enumerate(D)}
 
 
-m = len(Cost)
-n = len(Cost[1])
-
+#m = len(Cost)
+#n = len(Cost[1])
+m, n = Cost.shape
 
 ofertas = {o: oi for o, oi in zip(O, Oi)}
 demandas = {d: dj for d, dj in zip(D, Dj)}

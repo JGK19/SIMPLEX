@@ -1,0 +1,3 @@
+Status: Optimal
+Custo total: 13846.0
+Tempo de execução: 11.588499 segundos

@@ -1,0 +1,3 @@
+Status: solved
+Custo total: 8255.0
+Tempo de execução: 12.316596 segundos
