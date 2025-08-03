@@ -6,12 +6,12 @@ from vogel_method import vogel_method
 import pandas as pd
 
 
-Oi, Dj, Cost = gen_transport_problem(202, 902, seed=42)
+Oi, Dj, Cost = gen_transport_problem(201, 901, seed=42)
 m = len(Cost)
 n = len(Cost[1])
 
-
-"""df = pd.read_csv("problema_201x901_[1,100]_seed42", header=None)
+"""
+df = pd.read_csv("problema_11x11_[1,100]_seed42", header=None)
 
 num_ofertas = int(df.iloc[0, 0])
 num_demandas = int(df.iloc[0, 1])
@@ -20,7 +20,10 @@ Oi = df.iloc[1, :num_ofertas].to_numpy()
 Dj = df.iloc[2, :num_demandas].to_numpy()
 
 Cost = df.iloc[3:3+num_ofertas, :num_demandas].to_numpy()
-m, n = Cost.shape"""
+m, n = Cost.shape
+
+print(calcular_custo_total(canto_noroeste(Oi, Dj, Cost), Cost))"""
+
 
 matrix_var = [(list(None for _ in range(n))) for _ in range(m)]
 
@@ -29,7 +32,7 @@ prob = pulp.LpProblem("transport_classical", pulp.LpMinimize)
 # Creating each variable i-j
 for i in range(m):
     for j in range(n):
-        matrix_var[i][j] = pulp.LpVariable(f"edge_{i}_to_{j}", 0, None, pulp.LpInteger)
+        matrix_var[i][j] = pulp.LpVariable(f"edge_{i}_to_{j}", 0, None, pulp.LpContinuous)
 
 # Objective function
 eq = 0

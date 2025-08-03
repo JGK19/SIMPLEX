@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.optimize import linear_sum_assignment
+from algoHungaro import hungarian_algorithm
 
 # -----------------------------
 # 1) Dados
@@ -36,13 +37,13 @@ for i in range(n):
         if N[i] <= C[j]:
             W[i,j] = D[origem[i], j] * N[i]
         else:
-            W[i,j] = 1000 * N[i]   # penalização proporcional ao tamanho do grupo
+            W[i,j] = 1000 
 
 print(W)
 # -----------------------------
 # 3) Aplicar o método Húngaro em W
 # -----------------------------
-row_ind, col_ind = linear_sum_assignment(W)
+row_ind, col_ind = hungarian_algorithm(W)
 
 # -----------------------------
 # 4) Somar o custo direto

@@ -1,0 +1,13 @@
+status,custo,tempo_execucao,codigo
+Optimal,8255.0,4.724230,tClassico
+Optimal,8255.0,4.337765,tClassico
+Optimal,8255.0,4.323708,tClassico
+Optimal,8255.0,5.796289,tRestrito
+Optimal,8255.0,5.831091,tRestrito
+Optimal,8255.0,5.918916,tRestrito
+solved,8255.0,1.649912,tClassico_ampl_cbc
+solved,8255.0,8.989841,tClassico_ampl_highs
+solved,8255.0,9.245023,tClassico_ampl_scip
+aproximada,12415,32.497729,tVogel
+aproximada gulosa,9174,0.150103,tGuloso
+aproximada gulosa,9174,0.148424,tGuloso

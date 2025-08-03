@@ -5,7 +5,7 @@ param O {i in I};
 param D {j in J};
 param C {i in I, j in J};
 
-var x {i in I, j in J} >= 0, integer;
+var x {i in I, j in J} >= 0;
 
 minimize Total_Cost:
     sum {i in I, j in J} C[i,j] * x[i,j];

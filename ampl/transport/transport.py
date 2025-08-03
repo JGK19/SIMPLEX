@@ -21,7 +21,7 @@ Oi = Oi[Oi != 0]
 Dj = np.array(df.iloc[1])
 Cost = np.array(df.iloc[2:178, 0:210])"""
 
-Oi, Dj, Cost = gen_transport_problem_notint(1000, 1000, seed=42)
+Oi, Dj, Cost = gen_transport_problem(1000, 1000, seed=42)
 
 salvar_dados_ampl_transport(Oi, Dj, Cost, filename="transportDat.dat")
 

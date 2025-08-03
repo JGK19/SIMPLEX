@@ -1,0 +1,9 @@
+status,custo,tempo_execucao,codigo
+Optimal,8255.0,6.271195,tClassico
+Optimal,8255.0,5.932097,tClassico
+Optimal,8255.0,6.362827,tClassico
+Optimal,8255.0,8.178380,tRestrito
+Optimal,8255.0,7.125062,tClassico
+Optimal,8255.0,10.038571,tRestrito
+solved,8255.0,12.491571,tClassico_ampl_highs
+solved,8255.0,2.795414,tClassico_ampl_cbc

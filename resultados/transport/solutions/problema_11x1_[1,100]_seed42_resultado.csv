@@ -1,0 +1,4 @@
+status,custo,tempo_execucao,codigo
+Optimal,23546.0,0.050354,tClassico
+Solução heurística,23900,0.000058,tCantoNoroeste
+Solução heurística,26791,0.000655,tVogel

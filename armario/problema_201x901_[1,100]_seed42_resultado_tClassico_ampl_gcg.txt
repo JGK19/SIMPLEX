@@ -1,0 +1,3 @@
+Status: failure
+Custo total: 0.0
+Tempo de execução: 0.299750 segundos

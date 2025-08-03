@@ -4,6 +4,7 @@ import pulp
 import argparse
 import time
 import os
+import csv
 
 def solve_flow_problem(filepath):
     df = pd.read_csv(filepath, header=None)
@@ -55,15 +56,22 @@ def solve_flow_problem(filepath):
     return status, custo_total, tempo_exec
 
 def salvar_resultado(filepath, status, custo, tempo):
+
     script_path = __file__
     script_name = os.path.basename(script_path)
+    codigo = os.path.splitext(script_name)[0]
 
-    result_path = filepath.replace("instancias/", "solutions/")
-    result_path = result_path + f"_resultado_{script_name}.txt"
-    with open(result_path, "w") as f:
-        f.write(f"Status: {status}\n")
-        f.write(f"Custo total: {custo}\n")
-        f.write(f"Tempo de execução: {tempo:.6f} segundos\n")
+    os.makedirs("solutions", exist_ok=True)
+    csv_path = filepath.replace("instancias/", "solutions/")
+    csv_path = csv_path + f"_resultado.csv"
+
+    escrever_cabecalho = not os.path.exists(csv_path)
+
+    with open(csv_path, "a", newline="") as f:
+        writer = csv.writer(f)
+        if escrever_cabecalho:
+            writer.writerow(["status", "custo", "tempo_execucao", "codigo"])
+        writer.writerow([status, custo, f"{tempo:.6f}", codigo])
 
 def main():
     parser = argparse.ArgumentParser(description="Resolve problema de fluxo em rede equivalente ao problema de transporte.")

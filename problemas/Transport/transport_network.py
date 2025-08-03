@@ -7,7 +7,7 @@ import pandas as pd
 Oi = [100, 200]
 Dj = [100, 100, 100]"""
 
-Oi, Dj, Cost = gen_transport_problem(202, 902, seed=42)
+Oi, Dj, Cost = gen_transport_problem(100, 100, seed=42)
 
 """df = pd.read_csv("problema_201x901_[1,100]_seed42", header=None)
 

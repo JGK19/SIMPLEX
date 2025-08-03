@@ -41,19 +41,23 @@ def resolver_ampl(i, j, Oi, Dj, Cost, solver, nome_arquivo_csv):
 
     script_path = __file__
     script_name = os.path.basename(script_path)
+    codigo = f"{os.path.splitext(script_name)[0]}_{solver}"
 
-    resultado_path = nome_arquivo_csv.replace("instancias/", "solutions/")
-    resultado_path += f"_resultado_{script_name}_{solver}.txt"
+    resultado_csv = nome_arquivo_csv.replace("instancias/", "solutions/") + "_resultado.csv"
+    escrever_cabecalho = not os.path.exists(resultado_csv)
 
-    with open(resultado_path, "w") as f:
-        f.write(f"Status: {status}\n")
-        f.write(f"Custo total: {custo_total}\n")
-        f.write(f"Tempo de execução: {elapsed:.6f} segundos\n")
+    with open(resultado_csv, "a", newline="") as f:
+        import csv
+        writer = csv.writer(f)
+        if escrever_cabecalho:
+            writer.writerow(["status", "custo", "tempo_execucao", "codigo"])
+        writer.writerow([status, custo_total, f"{elapsed:.6f}", codigo])
 
     print("Problema resolvido via AMPL.")
     print(f"Status: {status}")
     print(f"Custo total: {custo_total}")
     print(f"Tempo: {elapsed:.6f} s")
+
 
 def main():
     parser = argparse.ArgumentParser(description="Resolve problema de transporte com AMPL a partir de CSV.")

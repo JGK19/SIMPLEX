@@ -1,0 +1,14 @@
+status,custo,tempo_execucao,codigo
+Optimal,2034.0,0.099842,tClassico
+Optimal,2034.0,0.084816,tRestrito
+Optimal,2034.0,0.061127,tClassico
+Optimal,2034.0,0.063704,tClassico
+Optimal,2034.0,0.072436,tClassico
+Optimal,2034.0,0.080906,tRestrito
+Optimal,2034.0,0.075430,tRestrito
+Optimal,2034.0,0.089114,tRestrito
+solved,2034.0,0.353736,tClassico_ampl_cbc
+solved,2034.0,0.701826,tClassico_ampl_highs
+solved,2034.0,0.350815,tClassico_ampl_scip
+solved,2034.0,0.529148,tClassico_ampl_gcg
+Solução heurística,12156,0.001144,tCantoNoroeste
