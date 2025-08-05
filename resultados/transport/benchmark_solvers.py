@@ -28,7 +28,7 @@ def benchmark_ampl_solvers():
     max_val = 100
     seed = 42
     rep = 10
-    solvers = ["highs", "cbc", "gurobi", "xpress", "cplex", "copt", "mosek"]
+    solvers = ["cbc", "gurobi", "xpress", "cplex", "mosek"]
 
     tempos_por_solver = {solver: [] for solver in solvers}
 

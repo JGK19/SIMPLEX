@@ -1,0 +1,4 @@
+status,custo,tempo_execucao,codigo
+aproximada,155684,8.369442,tGuloso
+solved,148253.0,105.481026,tClassico_ampl_gurobi
+aproximada,7432698,0.090742,tCantoNoroeste

@@ -1,0 +1,109 @@
+import os
+from amplpy import AMPL, Environment
+from gerador import gerar_instancia_viavel
+
+
+def main():
+    # -----------------------------
+    # Dados do problema
+    # -----------------------------
+    """
+    disciplinas = [f"D{i+1}" for i in range(10)]
+    salas = [f"S{i+1}" for i in range(10)]
+
+    N = [54, 51, 35, 40, 42, 31, 20, 51, 50, 24]  # alunos na 2ª aula
+    C = [44, 44, 42, 44, 30, 55, 52, 50, 51, 50]  # capacidades
+
+    salas_primeira_aula = ['S9', 'S2', 'S10', 'S8', 'S5', 'S7', 'S4', 'S3', 'S1', 'S6']
+    sala_idx = {'S1':0, 'S2':1, 'S3':2, 'S4':3, 'S5':4, 'S6':5, 'S7':6, 'S8':7, 'S9':8, 'S10':9}
+    origem = [sala_idx[s] for s in salas_primeira_aula]
+
+    D_base = [
+        [1,2,3,3,3,3,3,3,3,3],
+        [2,1,3,3,3,3,3,3,3,3],
+        [3,3,1,2,2,2,2,2,2,2],
+        [3,3,2,1,2,2,2,2,2,2],
+        [3,3,2,2,1,2,2,2,2,2],
+        [3,3,2,2,2,1,2,2,2,2],
+        [3,3,2,2,2,2,1,2,2,2],
+        [3,3,2,2,2,2,2,1,2,2],
+        [3,3,2,2,2,2,2,2,1,2],
+        [3,3,2,2,2,2,2,2,2,1],
+    ]
+
+    """
+    n = 10
+    disciplinas, salas, N, C, D = gen_classrom_problem(n, n, seed=42)
+    # Construir matriz D[i][j] com deslocamento da origem da disciplina i para sala j
+    #D = [D_base[origem[i]] for i in range(len(disciplinas))]
+
+    #escrever_modelo()
+    escrever_dados(disciplinas, salas, N, C, D)
+
+    ampl = AMPL()
+    ampl.read("modelo.mod")
+    ampl.readData("dados.dat")
+
+    ampl.option["solver"] = "gurobi"
+
+    ampl.solve()
+
+    print("\nStatus:", ampl.get_value("solve_result"))
+    print("Deslocamento total ótimo:", ampl.get_objective("Total_Deslocamento").value())
+
+
+    x = ampl.get_variable("x")
+    print("\nAlocação ótima (Disciplina → Sala):")
+    for (i, j), val in x.getValues().to_dict().items():
+        if val > 0.5:
+            print(f"  {i} → {j}")
+
+
+def escrever_modelo(path="modelo.mod"):
+    with open(path, "w") as f:
+        f.write(r"""
+set DISCIPLINAS;
+set SALAS;
+
+param N {DISCIPLINAS};          
+param C {SALAS};                
+param D {DISCIPLINAS, SALAS};   
+
+var x {DISCIPLINAS, SALAS} binary;
+
+minimize Total_Deslocamento:
+    sum {i in DISCIPLINAS, j in SALAS} N[i] * D[i,j] * x[i,j];
+
+subject to Alocar_Uma_Sala {i in DISCIPLINAS}:
+    sum {j in SALAS} x[i,j] = 1;
+
+subject to Uma_Disciplina_Por_Sala {j in SALAS}:
+    sum {i in DISCIPLINAS} x[i,j] <= 1;
+
+subject to Capacidade_Salas {i in DISCIPLINAS, j in SALAS}:
+    N[i] * x[i,j] <= C[j];
+""")
+
+def escrever_dados(disciplinas, salas, N, C, D, path="dados.dat"):
+    with open(path, "w") as f:
+        f.write("set DISCIPLINAS := " + " ".join(disciplinas) + ";\n")
+        f.write("set SALAS := " + " ".join(salas) + ";\n\n")
+
+        f.write("param N :=\n")
+        for d, n in zip(disciplinas, N):
+            f.write(f"{d} {n}\n")
+        f.write(";\n\n")
+
+        f.write("param C :=\n")
+        for s, c in zip(salas, C):
+            f.write(f"{s} {c}\n")
+        f.write(";\n\n")
+
+        f.write("param D : " + " ".join(salas) + " :=\n")
+        for i, d in enumerate(disciplinas):
+            f.write(d + " " + " ".join(str(D[i][j]) for j in range(len(salas))) + "\n")
+        f.write(";\n")
+
+
+if __name__ == "__main__":
+    main()
