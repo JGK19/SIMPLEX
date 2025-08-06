@@ -21,11 +21,12 @@ seed = 42
 
 def contar_execucoes_existentes(nome_instancia, solver):
     path_csv = f"solutions/resultado_{nome_instancia}.csv"
+    print(path_csv)
     if not os.path.exists(path_csv):
         return 0
     try:
         df = pd.read_csv(path_csv)
-        return len(df[df["codigo"] == f"tClassico_ampl_{solver}"])
+        return len(df[df["codigo"] == f"ensalamento_ampl_{solver}"])
     except Exception as e:
         print(f"[ERRO] ao ler {path_csv}: {e}")
         return 0
@@ -42,7 +43,7 @@ def rodar_execucao(tam, solver):
 
 def main():
     for tam in tamanhos:
-        nome_instancia = f"D{tam}_S{tam}_[{min_alunos},{max_alunos}]_[{min_cap},{max_cap}]_[{min_d},{max_d}]_seed{seed}.csv"
+        nome_instancia = f"D{tam}_S{tam}_[{min_alunos},{max_alunos}]_[{min_cap},{max_cap}]_[{min_d},{max_d}]_seed{seed}"
         print(f"\n>> Verificando instância: {nome_instancia}")
 
         # Construir fila de execuções necessárias

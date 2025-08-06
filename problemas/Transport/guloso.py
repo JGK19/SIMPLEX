@@ -1,12 +1,14 @@
 import numpy as np
 import pandas as pd
-
+from generator import gen_transport_problem
 
 def main():
+    """
     Cost = [[3, 4, 5],[6, 7, 8]]
-    Oi = [300, 300]
+    Oi = [100, 200]
     Dj = [100, 100, 100]
-
+    """
+    Oi, Dj, Cost = gen_transport_problem(100, 100, seed=42)
     sol = metodo_guloso(Oi, Dj, Cost)
     print(sol)
     print(calcular_custo_total(sol, Cost))

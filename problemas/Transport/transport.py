@@ -6,7 +6,7 @@ from vogel_method import vogel_method
 import pandas as pd
 
 
-Oi, Dj, Cost = gen_transport_problem(201, 901, seed=42)
+Oi, Dj, Cost = gen_transport_problem(100, 100, seed=42)
 m = len(Cost)
 n = len(Cost[1])
 

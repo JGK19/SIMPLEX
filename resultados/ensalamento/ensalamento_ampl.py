@@ -11,7 +11,7 @@ def resolver_com_ampl(solver, caminho_csv, nome_instancia):
 
     ampl = AMPL()
     ampl.read("ampl/modelo.mod")
-    ampl.readData("ampl/dados.dat")
+    ampl.readData(f"ampl/dados_{nome_instancia}.dat")
     ampl.option["solver"] = solver
 
     inicio = time.time()
