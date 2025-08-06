@@ -1,0 +1,9 @@
+status,custo,tempo_execucao,codigo
+solved,3280.0,0.2238457202911377,ensalamento_ampl_gurobi
+solved,3280.0,0.2420284748077392,ensalamento_ampl_cplex
+solved,3280.0,0.2329509258270263,ensalamento_ampl_cplex
+solved,3280.0,0.2507033348083496,ensalamento_ampl_cplex
+solved,3280.0,0.2216501235961914,ensalamento_ampl_gurobi
+solved,3280.0,0.3043770790100097,ensalamento_ampl_cbc
+solved,3280.0,0.2608642578125,ensalamento_ampl_mosek
+solved,3280.0,0.23659729957580566,ensalamento_ampl_cplex

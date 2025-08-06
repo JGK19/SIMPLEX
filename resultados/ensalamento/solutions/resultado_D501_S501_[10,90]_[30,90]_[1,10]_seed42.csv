@@ -1,0 +1,6 @@
+status,custo,tempo_execucao,codigo
+solved,15481.0,5.967899322509766,ensalamento_ampl_cplex
+solved,15481.0,6.831454038619995,ensalamento_ampl_cbc
+solved,15481.0,12.125712871551514,ensalamento_ampl_highs
+solved,15481.0,5.449389219284058,ensalamento_ampl_copt
+solved,15481.0,1.5479423999786377,ensalamento_ampl_gurobi
