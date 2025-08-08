@@ -1,13 +1,13 @@
 import os
 from amplpy import AMPL, Environment
-from gerador import gerar_instancia_viavel
+from gerador import gen_classrom_problem
 
 
 def main():
     # -----------------------------
     # Dados do problema
     # -----------------------------
-    n = 10
+    n = 1000
     disciplinas, salas, N, C, D = gen_classrom_problem(n, n, seed=42)
     # Construir matriz D[i][j] com deslocamento da origem da disciplina i para sala j
     #D = [D_base[origem[i]] for i in range(len(disciplinas))]
@@ -27,11 +27,11 @@ def main():
     print("Deslocamento total ótimo:", ampl.get_objective("Total_Deslocamento").value())
 
 
-    x = ampl.get_variable("x")
+    """x = ampl.get_variable("x")
     print("\nAlocação ótima (Disciplina → Sala):")
     for (i, j), val in x.getValues().to_dict().items():
         if val > 0.5:
-            print(f"  {i} → {j}")
+            print(f"  {i} → {j}")"""
 
 
 def escrever_modelo(path="modelo.mod"):

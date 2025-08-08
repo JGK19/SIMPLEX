@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.optimize import linear_sum_assignment
-from gerador import gerar_instancia_viavel
+from gerador import gen_classrom_problem
 
 # -----------------------------
 # 1) Dados
@@ -32,7 +32,7 @@ D = np.array([
     [3,3,2,2,2,2,2,2,2,1],
 ]) """
 
-n = 10
+n = 3000
 disciplinas, salas, N, C, D = gen_classrom_problem(n, n, seed=42)
 origem = [i for i in range(0, n)]
 
@@ -47,7 +47,7 @@ for i in range(n):
         else:
             Cp[i,j] = 1000
 
-print(Cp)
+#print(Cp)
 # -----------------------------
 # 3) Aplicar o método Húngaro
 # -----------------------------
@@ -64,6 +64,6 @@ real_cost = sum(D[origem[i], col_ind[idx]] * N[i] for idx, i in enumerate(row_in
 
 print(f"Deslocamento total: {real_cost}\n")
 
-print("Alocação obtida:")
+"""print("Alocação obtida:")
 for i, j in zip(row_ind, col_ind):
-    print(f"  D{i+1} → S{j+1}")
+    print(f"  D{i+1} → S{j+1}")"""

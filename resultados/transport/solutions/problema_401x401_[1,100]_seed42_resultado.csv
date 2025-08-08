@@ -96,7 +96,6 @@ solved,14271.0,3.004838,tClassico_ampl_gurobi
 solved,14271.0,3.098314,tClassico_ampl_cplex
 solved,14271.0,5.147329,tClassico_ampl_mosek
 solved,14271.0,103.589018,tClassico_ampl_mosek
-solved,14271.0,854.064075,tClassico_ampl_gurobi
 solved,14271.0,4.154469,tClassico_ampl_xpress
 solved,14271.0,20.722988,tClassico_ampl_copt
 solved,14271.0,4.925363,tClassico_ampl_xpress
@@ -139,3 +138,4 @@ aproximada,15699,0.152491,tGuloso
 aproximada,24944,19.713310,tVogel
 aproximada,24944,19.650433,tVogel
 aproximada,15699,0.151814,tGuloso
+solved,14271.0,1.531711,tClassico_ampl_gurobi

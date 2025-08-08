@@ -7,8 +7,9 @@ import pandas as pd
 # Parâmetros fixos
 python_exec = sys.executable
 
-tamanhos = list(range(101, 1001, 100)) + [2001]
-solvers = ["highs", "cbc", "gurobi", "xpress", "cplex", "mosek", "copt"]
+tamanhos = [101, 201, 301, 401, 501, 601, 701, 801, 901, 1001, 2001]
+solvers = ["highs", "cbc", "gurobi", "xpress", "cplex", "mosek", "copt", "gcg", "scip"]
+#solvers = ["hungaro", "guloso"]
 K = 10
 
 min_alunos = 10
@@ -40,6 +41,14 @@ def rodar_execucao(tam, solver):
     ]
     subprocess.run(cmd, check=True)
 
+def executar(tam, solver):
+    cmd = [
+        python_exec, f"{solver}.py",
+        "-i", str(tam),
+        "-j", str(tam),
+    ]
+    subprocess.run(cmd, check=True)
+
 
 def main():
     for tam in tamanhos:
@@ -66,6 +75,7 @@ def main():
             try:
                 print(f"  -> Executando {solver} para {nome_instancia}")
                 rodar_execucao(tam, solver)
+                #executar(tam, solver)
             except subprocess.CalledProcessError as e:
                 print(f"[ERRO] na execução com {solver} para {nome_instancia}")
 

@@ -4,8 +4,8 @@ import numpy as np
 instances_folder = "instancias/"
 
 def main():
-    for j in [10**k for k in range(1,5)]:
-        for i in range(1, j, int(j * (1/10))):
+    for j in [1001]: #[10**k for k in range(1,5)]:
+        for i in [1001]: #range(1, j, int(j * (1/10))):
             n_disciplinas = i
             n_salas = i
             min_alunos = 10
