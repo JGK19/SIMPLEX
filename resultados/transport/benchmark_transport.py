@@ -82,8 +82,8 @@ def benchmark_transport():
 
     # Gráfico
     plt.figure(figsize=(10,6))
-    plt.plot(tamanhos, tempos_classico, label="Modelo Clássico (PL)", marker='o')
-    plt.plot(tamanhos, tempos_fluxo, label="Modelo Fluxo em Rede", marker='s')
+    plt.plot(tamanhos, tempos_classico, label="Modelo Clássico", marker='o')
+    plt.plot(tamanhos, tempos_fluxo, label="Modelo Restrito", marker='s')
     plt.xlabel("Tamanho do problema (n x n)")
     plt.ylabel("Tempo médio de execução (s)")
     plt.title("Comparação de tempo médio de execução")
